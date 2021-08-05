@@ -45,7 +45,7 @@ public class TestController {
         try {
             List<Bill> billList = userService.getAllBillsForUser(id);
             if(billList.size()==0){
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT); //no bills exist
             }
             return new ResponseEntity<>(billList,HttpStatus.OK);
 
@@ -60,7 +60,7 @@ public class TestController {
         try {
            long exists = billService.addBill(id,bill);
            if(exists==-1){
-               return new ResponseEntity<>("user not found",HttpStatus.NO_CONTENT);
+               return new ResponseEntity<>("user not found",HttpStatus.NO_CONTENT); //no user exist for this id
            }
            return new ResponseEntity<>("Bill added for the respective user",HttpStatus.OK);
         }
@@ -73,7 +73,7 @@ public class TestController {
         try{
             Bill updatedBill = billService.updateBill(id,bill);
             if(updatedBill==null){
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND); //if bill id not found then return the 404 error
             }
             return new ResponseEntity<>(updatedBill,HttpStatus.OK);
         }
